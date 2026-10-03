@@ -1,0 +1,15 @@
+Proprietary - All Rights Reserved
+
+Copyright (c) 2026 Pratham Prateek Mohanty / Project NHE.
+
+No part of this repository (source code, documents, taxonomy, graphics,
+notebooks) may be copied, modified, distributed, sublicensed or used,
+in whole or in part, without prior written permission from the copyright holder.
+No license is granted by implication, estoppel or otherwise.
+
+Third-party components:
+The Qwen2.5 base model (for example Qwen2.5-1.5B-Instruct) is licensed by its
+authors under the Apache License 2.0. It remains under Apache-2.0, together
+with its upstream copyright and notice files. Nothing in this license
+restricts, replaces or relicenses the base model, and any use of the base model
+must comply with Apache-2.0 and preserve those upstream notices.
