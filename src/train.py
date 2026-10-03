@@ -38,7 +38,7 @@ optimizer=torch.optim.AdamW([p for p in model.parameters() if p.requires_grad],l
 random.shuffle(prepared);steps=math.ceil(len(prepared)/16);scheduler=get_cosine_schedule_with_warmup(optimizer,max(1,steps//20),steps);scaler=torch.amp.GradScaler('cuda');model.train();start=time.time();losses=[];global_step=0
 for i,r in enumerate(prepared):
  ids=torch.tensor([r['input_ids']],device=model.device);labels=torch.tensor([r['labels']],device=model.device)
- with torch.autocast('cuda',dtype=torch.float16):raw=model(input_ids=ids,attention_mask=torch.ones_like(ids),labels=labels).loss;loss=raw/16
+ with torch.autocast('cuda',dtype=torch.float16):raw=model(input_ids=ids,attention_mask=torch.ones_like(ids),labels=labels).loss;loss=raw/min(16,len(prepared)-(i//16)*16)
  scaler.scale(loss).backward();losses.append(raw.item())
  if (i+1)%16==0 or i+1==len(prepared):
   scaler.unscale_(optimizer);torch.nn.utils.clip_grad_norm_(model.parameters(),1);scaler.step(optimizer);scaler.update();optimizer.zero_grad();scheduler.step();global_step+=1
