@@ -1,4 +1,4 @@
-![Elysium X 150 FR monochrome animated title card](4-elysium-motion.gif)
+![Elysium X 150 FR monochrome animated title card](elysium-banner.svg)
 
 # Elysium X 150 FR
 
@@ -8,7 +8,7 @@ A trained LoRA adapter on pinned Qwen2.5-1.5B-Instruct for sparse, per-speaker e
 
 ## Final adapter and loading
 
-Final weights: `chatgpt_batch_v2_recovery/adapter` in this repository. The preserved final training/evaluation commit is `6f27585af638531c2dabed110d0cc183b4b040d0`. Prior adapters and diagnostic runs are retained as history, not promoted as the final model.
+Final weights: `chatgpt_batch_v2_recovery/adapter` in the linked Hugging Face repository. The preserved final training/evaluation commit is `6f27585af638531c2dabed110d0cc183b4b040d0`. Prior adapters and diagnostic runs are retained as history, not promoted as the final model.
 
 ```python
 from transformers import AutoTokenizer, AutoModelForCausalLM
@@ -27,7 +27,7 @@ model = PeftModel.from_pretrained(
 
 Hugging Face model repository: https://huggingface.co/open-nhe/Elysium-X-150-FR
 
-Authenticate separately with an account permitted to read this private repository. Do not put access tokens in notebooks or source files. Use the exact system prompt and causal input format documented in `release/inference_contract.txt` inside `2-FinalRelease_Code_Audit.zip`. The model emits `{"dimensions":[{"id":1,"strength":0.5}]}` with IDs 1..150 and expressed intensity >0..1. An empty list means no supported label was returned, not verified neutrality. Omitted coordinates are unknown, not proven absent.
+Authenticate separately with an account permitted to read this private repository. Do not put access tokens in notebooks or source files. Use the exact system prompt and causal input format documented in `release/inference_contract.txt` in the HF `1-FinalRelease_Code_Audit.zip`. The model emits `{"dimensions":[{"id":1,"strength":0.5}]}` with IDs 1..150 and expressed intensity >0..1. An empty list means no supported label was returned, not verified neutrality. Omitted coordinates are unknown, not proven absent.
 
 ## Data and human review
 
@@ -66,11 +66,11 @@ The recovery `comparison.json` retains a historical key `base` for the loaded st
 
 ## Contents
 
-The code/audit package on this GitHub repository is `2-FinalRelease_Code_Audit.zip`; the original HF run folders below are on the linked model repository.
+The text code/audit on this GitHub repository is `RELEASE_CODE_AND_EVIDENCE.md`; the original HF run folders below are on the linked model repository.
 
 - `chatgpt_batch_v2_recovery/adapter`: final adapter and tokenizer files.
 - `chatgpt_batch_v2_recovery/`: final metrics, predictions, comparison, curve, run configuration, frozen splits and recoverable training state.
-- GitHub `2-FinalRelease_Code_Audit.zip`: runnable training scripts, taxonomy, audit, inference contract and final prediction evidence. The same package is stored on HF.
+- GitHub `RELEASE_CODE_AND_EVIDENCE.md`: training script source and final metrics/configuration. The complete prediction/audit package is the HF `1-FinalRelease_Code_Audit.zip`.
 - `chatgpt_batch_v2/`: earlier checkpoint and untouched-base results.
 - Other directories: historical pilot/anchor evidence, with their own limits.
 
