@@ -25,7 +25,9 @@ model = PeftModel.from_pretrained(
 )
 ```
 
-Authenticate separately with an account permitted to read this private repository. Do not put access tokens in notebooks or source files. Use the exact system prompt and causal input format documented in `release/inference_contract.txt`. The model emits `{"dimensions":[{"id":1,"strength":0.5}]}` with IDs 1..150 and expressed intensity >0..1. An empty list means no supported label was returned, not verified neutrality. Omitted coordinates are unknown, not proven absent.
+Hugging Face model repository: https://huggingface.co/open-nhe/Elysium-X-150-FR
+
+Authenticate separately with an account permitted to read this private repository. Do not put access tokens in notebooks or source files. Use the exact system prompt and causal input format documented in `release/inference_contract.txt` inside `2-FinalRelease_Code_Audit.zip`. The model emits `{"dimensions":[{"id":1,"strength":0.5}]}` with IDs 1..150 and expressed intensity >0..1. An empty list means no supported label was returned, not verified neutrality. Omitted coordinates are unknown, not proven absent.
 
 ## Data and human review
 
@@ -58,15 +60,17 @@ Matched-label intensity MAE: 0.0161. This is teacher-label agreement, not valida
 
 Pinned base revision: `989aa7980e4cf806f80c7fef2b1adb7bc71aa306`. QLoRA rank 16, learning rate 0.0001, gradient accumulation 8, seed 150, maximum input-plus-output budget 4096 tokens.
 
-First stage saved 125 optimizer steps / 1,000 example updates before the interactive session was cancelled. Continuation loaded that adapter with a new optimizer/scheduler, then completed 127 steps / 1,012 updates. This was not an exact uninterrupted resume. Recovery checkpoints include optimizer, scheduler and scaler state. The committed free-GPU run completed in 48 minutes 44 seconds.
+First stage saved 125 optimizer steps / 1,000 example updates before the interactive session was cancelled. Continuation loaded that adapter with a new optimizer/scheduler, then completed 127 steps / 1,012 updates. This was not an exact uninterrupted resume. The committed free-GPU run completed in 48 minutes 44 seconds.
 
 The recovery `comparison.json` retains a historical key `base` for the loaded step-125 adapter. It is not the untouched base. The separate original `chatgpt_batch_v2/base_metrics.json` contains that baseline. Final predictions and their aggregate counts were independently recounted.
 
 ## Contents
 
+The code/audit package on this GitHub repository is `2-FinalRelease_Code_Audit.zip`; the original HF run folders below are on the linked model repository.
+
 - `chatgpt_batch_v2_recovery/adapter`: final adapter and tokenizer files.
 - `chatgpt_batch_v2_recovery/`: final metrics, predictions, comparison, curve, run configuration, frozen splits and recoverable training state.
-- `release/`: audit, inference contract and release scope.
+- GitHub `2-FinalRelease_Code_Audit.zip`: runnable training scripts, taxonomy, audit, inference contract and final prediction evidence. The same package is stored on HF.
 - `chatgpt_batch_v2/`: earlier checkpoint and untouched-base results.
 - Other directories: historical pilot/anchor evidence, with their own limits.
 
