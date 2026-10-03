@@ -2,6 +2,8 @@
 
 # Elysium X 150 FR
 
+[Illustrated 30-page PDF guide](https://huggingface.co/open-nhe/Elysium-X-150-FR/blob/main/7-Elysium_X_150_FR_Full_Documentation.pdf) (private HF access required).
+
 [Read the full plain-language guide, workflows and all 150 labels](DOCUMENTATION.md) · [Model and weights](https://huggingface.co/open-nhe/Elysium-X-150-FR) · [Code and evidence](RELEASE_CODE_AND_EVIDENCE.md)
 
 Private research release by Pratham Prateek Mohanty, OpenNHE Technologies.
