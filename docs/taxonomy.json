@@ -1,0 +1,755 @@
+{
+  "version": "x150-v0.1-proposal",
+  "dimensions": [
+    {
+      "id": 1,
+      "name": "joy",
+      "family": "Positive affect"
+    },
+    {
+      "id": 2,
+      "name": "contentment",
+      "family": "Positive affect"
+    },
+    {
+      "id": 3,
+      "name": "amusement",
+      "family": "Positive affect"
+    },
+    {
+      "id": 4,
+      "name": "excitement",
+      "family": "Positive affect"
+    },
+    {
+      "id": 5,
+      "name": "delight",
+      "family": "Positive affect"
+    },
+    {
+      "id": 6,
+      "name": "elation",
+      "family": "Positive affect"
+    },
+    {
+      "id": 7,
+      "name": "serenity",
+      "family": "Positive affect"
+    },
+    {
+      "id": 8,
+      "name": "relief",
+      "family": "Positive affect"
+    },
+    {
+      "id": 9,
+      "name": "hope",
+      "family": "Positive affect"
+    },
+    {
+      "id": 10,
+      "name": "optimism",
+      "family": "Positive affect"
+    },
+    {
+      "id": 11,
+      "name": "gratitude",
+      "family": "Positive affect"
+    },
+    {
+      "id": 12,
+      "name": "pride",
+      "family": "Positive affect"
+    },
+    {
+      "id": 13,
+      "name": "admiration",
+      "family": "Positive affect"
+    },
+    {
+      "id": 14,
+      "name": "awe",
+      "family": "Positive affect"
+    },
+    {
+      "id": 15,
+      "name": "inspiration",
+      "family": "Positive affect"
+    },
+    {
+      "id": 16,
+      "name": "sadness",
+      "family": "Distress and loss"
+    },
+    {
+      "id": 17,
+      "name": "grief",
+      "family": "Distress and loss"
+    },
+    {
+      "id": 18,
+      "name": "sorrow",
+      "family": "Distress and loss"
+    },
+    {
+      "id": 19,
+      "name": "loneliness",
+      "family": "Distress and loss"
+    },
+    {
+      "id": 20,
+      "name": "emptiness",
+      "family": "Distress and loss"
+    },
+    {
+      "id": 21,
+      "name": "disappointment",
+      "family": "Distress and loss"
+    },
+    {
+      "id": 22,
+      "name": "discouragement",
+      "family": "Distress and loss"
+    },
+    {
+      "id": 23,
+      "name": "despair",
+      "family": "Distress and loss"
+    },
+    {
+      "id": 24,
+      "name": "helplessness",
+      "family": "Distress and loss"
+    },
+    {
+      "id": 25,
+      "name": "hopelessness",
+      "family": "Distress and loss"
+    },
+    {
+      "id": 26,
+      "name": "regret",
+      "family": "Distress and loss"
+    },
+    {
+      "id": 27,
+      "name": "remorse",
+      "family": "Distress and loss"
+    },
+    {
+      "id": 28,
+      "name": "guilt",
+      "family": "Distress and loss"
+    },
+    {
+      "id": 29,
+      "name": "shame",
+      "family": "Distress and loss"
+    },
+    {
+      "id": 30,
+      "name": "embarrassment",
+      "family": "Distress and loss"
+    },
+    {
+      "id": 31,
+      "name": "fear",
+      "family": "Threat and uncertainty"
+    },
+    {
+      "id": 32,
+      "name": "anxiety",
+      "family": "Threat and uncertainty"
+    },
+    {
+      "id": 33,
+      "name": "nervousness",
+      "family": "Threat and uncertainty"
+    },
+    {
+      "id": 34,
+      "name": "apprehension",
+      "family": "Threat and uncertainty"
+    },
+    {
+      "id": 35,
+      "name": "worry",
+      "family": "Threat and uncertainty"
+    },
+    {
+      "id": 36,
+      "name": "dread",
+      "family": "Threat and uncertainty"
+    },
+    {
+      "id": 37,
+      "name": "panic",
+      "family": "Threat and uncertainty"
+    },
+    {
+      "id": 38,
+      "name": "insecurity",
+      "family": "Threat and uncertainty"
+    },
+    {
+      "id": 39,
+      "name": "vulnerability",
+      "family": "Threat and uncertainty"
+    },
+    {
+      "id": 40,
+      "name": "unease",
+      "family": "Threat and uncertainty"
+    },
+    {
+      "id": 41,
+      "name": "suspicion",
+      "family": "Threat and uncertainty"
+    },
+    {
+      "id": 42,
+      "name": "distrust",
+      "family": "Threat and uncertainty"
+    },
+    {
+      "id": 43,
+      "name": "uncertainty",
+      "family": "Threat and uncertainty"
+    },
+    {
+      "id": 44,
+      "name": "overwhelm",
+      "family": "Threat and uncertainty"
+    },
+    {
+      "id": 45,
+      "name": "stress",
+      "family": "Threat and uncertainty"
+    },
+    {
+      "id": 46,
+      "name": "anger",
+      "family": "Opposition and injury"
+    },
+    {
+      "id": 47,
+      "name": "annoyance",
+      "family": "Opposition and injury"
+    },
+    {
+      "id": 48,
+      "name": "frustration",
+      "family": "Opposition and injury"
+    },
+    {
+      "id": 49,
+      "name": "irritation",
+      "family": "Opposition and injury"
+    },
+    {
+      "id": 50,
+      "name": "resentment",
+      "family": "Opposition and injury"
+    },
+    {
+      "id": 51,
+      "name": "bitterness",
+      "family": "Opposition and injury"
+    },
+    {
+      "id": 52,
+      "name": "indignation",
+      "family": "Opposition and injury"
+    },
+    {
+      "id": 53,
+      "name": "outrage",
+      "family": "Opposition and injury"
+    },
+    {
+      "id": 54,
+      "name": "disgust",
+      "family": "Opposition and injury"
+    },
+    {
+      "id": 55,
+      "name": "contempt",
+      "family": "Opposition and injury"
+    },
+    {
+      "id": 56,
+      "name": "envy",
+      "family": "Opposition and injury"
+    },
+    {
+      "id": 57,
+      "name": "jealousy",
+      "family": "Opposition and injury"
+    },
+    {
+      "id": 58,
+      "name": "humiliation",
+      "family": "Opposition and injury"
+    },
+    {
+      "id": 59,
+      "name": "betrayal",
+      "family": "Opposition and injury"
+    },
+    {
+      "id": 60,
+      "name": "hurt",
+      "family": "Opposition and injury"
+    },
+    {
+      "id": 61,
+      "name": "affection",
+      "family": "Bonding and care"
+    },
+    {
+      "id": 62,
+      "name": "love",
+      "family": "Bonding and care"
+    },
+    {
+      "id": 63,
+      "name": "tenderness",
+      "family": "Bonding and care"
+    },
+    {
+      "id": 64,
+      "name": "compassion",
+      "family": "Bonding and care"
+    },
+    {
+      "id": 65,
+      "name": "empathy",
+      "family": "Bonding and care"
+    },
+    {
+      "id": 66,
+      "name": "caring",
+      "family": "Bonding and care"
+    },
+    {
+      "id": 67,
+      "name": "warmth",
+      "family": "Bonding and care"
+    },
+    {
+      "id": 68,
+      "name": "fondness",
+      "family": "Bonding and care"
+    },
+    {
+      "id": 69,
+      "name": "attachment",
+      "family": "Bonding and care"
+    },
+    {
+      "id": 70,
+      "name": "belonging",
+      "family": "Bonding and care"
+    },
+    {
+      "id": 71,
+      "name": "acceptance",
+      "family": "Bonding and care"
+    },
+    {
+      "id": 72,
+      "name": "trust",
+      "family": "Bonding and care"
+    },
+    {
+      "id": 73,
+      "name": "emotional_closeness",
+      "family": "Bonding and care"
+    },
+    {
+      "id": 74,
+      "name": "intimacy",
+      "family": "Bonding and care"
+    },
+    {
+      "id": 75,
+      "name": "solidarity",
+      "family": "Bonding and care"
+    },
+    {
+      "id": 76,
+      "name": "approval",
+      "family": "Social appraisal"
+    },
+    {
+      "id": 77,
+      "name": "disapproval",
+      "family": "Social appraisal"
+    },
+    {
+      "id": 78,
+      "name": "respect",
+      "family": "Social appraisal"
+    },
+    {
+      "id": 79,
+      "name": "disrespect",
+      "family": "Social appraisal"
+    },
+    {
+      "id": 80,
+      "name": "appreciation",
+      "family": "Social appraisal"
+    },
+    {
+      "id": 81,
+      "name": "feeling_seen",
+      "family": "Social appraisal"
+    },
+    {
+      "id": 82,
+      "name": "feeling_unheard",
+      "family": "Social appraisal"
+    },
+    {
+      "id": 83,
+      "name": "validation",
+      "family": "Social appraisal"
+    },
+    {
+      "id": 84,
+      "name": "invalidation",
+      "family": "Social appraisal"
+    },
+    {
+      "id": 85,
+      "name": "rejection",
+      "family": "Social appraisal"
+    },
+    {
+      "id": 86,
+      "name": "exclusion",
+      "family": "Social appraisal"
+    },
+    {
+      "id": 87,
+      "name": "social_comparison",
+      "family": "Social appraisal"
+    },
+    {
+      "id": 88,
+      "name": "status_threat",
+      "family": "Social appraisal"
+    },
+    {
+      "id": 89,
+      "name": "dignity",
+      "family": "Social appraisal"
+    },
+    {
+      "id": 90,
+      "name": "recognition",
+      "family": "Social appraisal"
+    },
+    {
+      "id": 91,
+      "name": "curiosity",
+      "family": "Knowledge and surprise"
+    },
+    {
+      "id": 92,
+      "name": "interest",
+      "family": "Knowledge and surprise"
+    },
+    {
+      "id": 93,
+      "name": "confusion",
+      "family": "Knowledge and surprise"
+    },
+    {
+      "id": 94,
+      "name": "surprise",
+      "family": "Knowledge and surprise"
+    },
+    {
+      "id": 95,
+      "name": "astonishment",
+      "family": "Knowledge and surprise"
+    },
+    {
+      "id": 96,
+      "name": "bewilderment",
+      "family": "Knowledge and surprise"
+    },
+    {
+      "id": 97,
+      "name": "realization",
+      "family": "Knowledge and surprise"
+    },
+    {
+      "id": 98,
+      "name": "understanding",
+      "family": "Knowledge and surprise"
+    },
+    {
+      "id": 99,
+      "name": "doubt",
+      "family": "Knowledge and surprise"
+    },
+    {
+      "id": 100,
+      "name": "skepticism",
+      "family": "Knowledge and surprise"
+    },
+    {
+      "id": 101,
+      "name": "certainty",
+      "family": "Knowledge and surprise"
+    },
+    {
+      "id": 102,
+      "name": "wonder",
+      "family": "Knowledge and surprise"
+    },
+    {
+      "id": 103,
+      "name": "cognitive_conflict",
+      "family": "Knowledge and surprise"
+    },
+    {
+      "id": 104,
+      "name": "disbelief",
+      "family": "Knowledge and surprise"
+    },
+    {
+      "id": 105,
+      "name": "expectation_violation",
+      "family": "Knowledge and surprise"
+    },
+    {
+      "id": 106,
+      "name": "desire",
+      "family": "Agency and motivation"
+    },
+    {
+      "id": 107,
+      "name": "longing",
+      "family": "Agency and motivation"
+    },
+    {
+      "id": 108,
+      "name": "yearning",
+      "family": "Agency and motivation"
+    },
+    {
+      "id": 109,
+      "name": "determination",
+      "family": "Agency and motivation"
+    },
+    {
+      "id": 110,
+      "name": "resolve",
+      "family": "Agency and motivation"
+    },
+    {
+      "id": 111,
+      "name": "motivation",
+      "family": "Agency and motivation"
+    },
+    {
+      "id": 112,
+      "name": "ambition",
+      "family": "Agency and motivation"
+    },
+    {
+      "id": 113,
+      "name": "confidence",
+      "family": "Agency and motivation"
+    },
+    {
+      "id": 114,
+      "name": "self_efficacy",
+      "family": "Agency and motivation"
+    },
+    {
+      "id": 115,
+      "name": "agency",
+      "family": "Agency and motivation"
+    },
+    {
+      "id": 116,
+      "name": "powerlessness",
+      "family": "Agency and motivation"
+    },
+    {
+      "id": 117,
+      "name": "perceived_control",
+      "family": "Agency and motivation"
+    },
+    {
+      "id": 118,
+      "name": "autonomy",
+      "family": "Agency and motivation"
+    },
+    {
+      "id": 119,
+      "name": "defiance",
+      "family": "Agency and motivation"
+    },
+    {
+      "id": 120,
+      "name": "resignation",
+      "family": "Agency and motivation"
+    },
+    {
+      "id": 121,
+      "name": "calmness",
+      "family": "Regulation and readiness"
+    },
+    {
+      "id": 122,
+      "name": "agitation",
+      "family": "Regulation and readiness"
+    },
+    {
+      "id": 123,
+      "name": "tension",
+      "family": "Regulation and readiness"
+    },
+    {
+      "id": 124,
+      "name": "restlessness",
+      "family": "Regulation and readiness"
+    },
+    {
+      "id": 125,
+      "name": "emotional_fatigue",
+      "family": "Regulation and readiness"
+    },
+    {
+      "id": 126,
+      "name": "composure",
+      "family": "Regulation and readiness"
+    },
+    {
+      "id": 127,
+      "name": "patience",
+      "family": "Regulation and readiness"
+    },
+    {
+      "id": 128,
+      "name": "impatience",
+      "family": "Regulation and readiness"
+    },
+    {
+      "id": 129,
+      "name": "defensiveness",
+      "family": "Regulation and readiness"
+    },
+    {
+      "id": 130,
+      "name": "openness",
+      "family": "Regulation and readiness"
+    },
+    {
+      "id": 131,
+      "name": "guardedness",
+      "family": "Regulation and readiness"
+    },
+    {
+      "id": 132,
+      "name": "emotional_numbness",
+      "family": "Regulation and readiness"
+    },
+    {
+      "id": 133,
+      "name": "emotional_recovery",
+      "family": "Regulation and readiness"
+    },
+    {
+      "id": 134,
+      "name": "willingness_to_engage",
+      "family": "Regulation and readiness"
+    },
+    {
+      "id": 135,
+      "name": "withdrawal",
+      "family": "Regulation and readiness"
+    },
+    {
+      "id": 136,
+      "name": "reassurance_seeking",
+      "family": "Relational needs and repair"
+    },
+    {
+      "id": 137,
+      "name": "support_seeking",
+      "family": "Relational needs and repair"
+    },
+    {
+      "id": 138,
+      "name": "comfort_seeking",
+      "family": "Relational needs and repair"
+    },
+    {
+      "id": 139,
+      "name": "connection_seeking",
+      "family": "Relational needs and repair"
+    },
+    {
+      "id": 140,
+      "name": "distance_seeking",
+      "family": "Relational needs and repair"
+    },
+    {
+      "id": 141,
+      "name": "boundary_assertion",
+      "family": "Relational needs and repair"
+    },
+    {
+      "id": 142,
+      "name": "boundary_discomfort",
+      "family": "Relational needs and repair"
+    },
+    {
+      "id": 143,
+      "name": "fear_of_abandonment",
+      "family": "Relational needs and repair"
+    },
+    {
+      "id": 144,
+      "name": "dependency_concern",
+      "family": "Relational needs and repair"
+    },
+    {
+      "id": 145,
+      "name": "reciprocity_expectation",
+      "family": "Relational needs and repair"
+    },
+    {
+      "id": 146,
+      "name": "forgiveness",
+      "family": "Relational needs and repair"
+    },
+    {
+      "id": 147,
+      "name": "reconciliation_desire",
+      "family": "Relational needs and repair"
+    },
+    {
+      "id": 148,
+      "name": "conflict_repair",
+      "family": "Relational needs and repair"
+    },
+    {
+      "id": 149,
+      "name": "relational_ambivalence",
+      "family": "Relational needs and repair"
+    },
+    {
+      "id": 150,
+      "name": "self_disclosure_readiness",
+      "family": "Relational needs and repair"
+    }
+  ]
+}
