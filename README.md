@@ -1,98 +1,83 @@
 <p align="center"><img src="assets/banner.svg" alt="Elysium X 150 FR" width="100%"></p>
 
-<p align="center">
-<b>Status: design and scaffold.</b> No training data, adapter weights or evaluation scores exist yet.<br>
-Hugging Face shell (private, untrained model card): <a href="https://huggingface.co/itsppm76/Elysium-X-150-FR">itsppm76/Elysium-X-150-FR</a>
-</p>
+# Elysium X 150 FR
 
-## What this is
+Private research release by Pratham Prateek Mohanty, OpenNHE Technologies.
 
-Elysium X 150 FR is a planned LoRA adapter on Qwen2.5-1.5B-Instruct for contextual emotion appraisal. Given a dialogue up to a target turn, it should output a sparse JSON list of strengths over a fixed 150-coordinate product schema. A deterministic state module then turns the active coordinates into a reproducible state record.
+A trained LoRA adapter on pinned Qwen2.5-1.5B-Instruct for sparse, per-speaker emotion/appraisal JSON across a provisional 150-coordinate schema. This is a measured English synthetic-data release, not a claim of SOTA, independently validated psychology, multilingual performance, or deployment readiness.
 
-This repository holds the design, the schema, the deterministic code with its tests, and a training scaffold. It does not hold a model.
+## Final adapter and loading
 
-| Item | Status |
-|---|---|
-| Phase 1 research and design gate (`docs/phase1.md`) | Written |
-| 150-dimension taxonomy v0.1 proposal (`docs/taxonomy.json`) | Written, unvalidated by annotators |
-| Deterministic state and NcR indexing (`src/state.py`) | Written, tested |
-| Shared causal window (`src/window.py`) | Written, tested |
-| Strict output schema and masked evaluation code (`src/metrics.py`) | Written, tested. Never run on real model output |
-| OASST ingestion with tree-level splits (`src/ingest_oasst.py`) | Written, nothing downloaded or accepted yet |
-| Pilot notebooks, original and HF-checkpoint fallback (`notebooks/`) | Scaffold, no published results |
-| Training script (`src/train.py`) | Scaffold, not run for any released result |
-| Unit tests | 11 pass (state, causal window, metrics) |
-| Training data | None accepted yet |
-| Adapter weights | None |
-| Evaluation scores | None |
-
-## Workflow
-
-<img src="assets/workflow.svg" alt="Workflow and status" width="100%">
-
-## Architecture
-
-<img src="assets/architecture.svg" alt="Architecture" width="100%">
-
-Individual-speaker appraisal is kept separate from the companion's response state and from safety decisions. The adapter output is only the first of these.
-
-The window module is shared by training, evaluation and runtime. It keeps turns `0..target` only, so future turns can never leak. If the task text plus the target turn exceed the budget, the record is rejected rather than truncated. Dialogue is treated as untrusted data, never as instructions.
-
-## Taxonomy overview
-
-<img src="assets/taxonomy.svg" alt="Taxonomy overview" width="100%">
-
-Ten families of fifteen dimensions: positive affect, distress and loss, threat and uncertainty, opposition and injury, bonding and care, social appraisal, knowledge and surprise, agency and motivation, regulation and readiness, relational needs and repair. The full list is in [`docs/taxonomy.json`](docs/taxonomy.json).
-
-These are operational text-appraisal coordinates, not 150 independent, validated human emotions. Each dimension still needs a definition, examples, exclusion examples and annotator guidelines. Strength is a value per dimension. A speaker can express several or conflicting dimensions. Omission means "unreported", not "known absent"; the state record lists unknown IDs explicitly.
-
-## NcR: the combinatorial index
-
-Let the taxonomy have n = 150 ordered dimensions. A state activates a subset of r dimensions with sorted IDs c<sub>1</sub> < c<sub>2</sub> < ... < c<sub>r</sub>. NcR counts and indexes those subsets:
-
-```
-number of subsets of size r:   C(n, r) = n! / (r! (n-r)!)
-all subsets:                   sum over r of C(150, r) = 2^150  (about 1.43 x 10^45)
-rank (colexicographic):        rank(c) = sum for j = 1..r of C(c_j - 1, j)
-```
-
-Examples: C(150, 3) = 551,300 and C(150, 5) = 591,600,030. For a fixed r and fixed ordered taxonomy, ranks run from 0 to C(n, r) - 1 with no gaps and no repeats; `tests/test_state.py` checks this on a small case.
-
-What NcR is not:
-- It does not create training examples.
-- It does not show that two people, or two moments, are psychologically unique. A rank is unique only for that subset under that taxonomy version, and the cardinality r is stored alongside it.
-- It does not imply any model quality. It is an index, not a learned law.
-
-A full state record also keeps the taxonomy version, speaker, the dimension strengths, and a SHA-256 over a canonical JSON serialization. Equal active subsets do not mean equal emotions. If strengths are ever quantized for a key, the unquantized vector must be kept and the collisions disclosed.
+Final weights: `chatgpt_batch_v2_recovery/adapter` in this repository. The preserved final training/evaluation commit is `6f27585af638531c2dabed110d0cc183b4b040d0`. Prior adapters and diagnostic runs are retained as history, not promoted as the final model.
 
 ```python
-from state import subset_rank, state   # run from src/
-subset_rank([3, 17, 42])          # {'n': 150, 'r': 3, 'rank': ..., 'active_ids': [3, 17, 42]}
+from transformers import AutoTokenizer, AutoModelForCausalLM
+from peft import PeftModel
+
+base = "Qwen/Qwen2.5-1.5B-Instruct"
+revision = "989aa7980e4cf806f80c7fef2b1adb7bc71aa306"
+tokenizer = AutoTokenizer.from_pretrained(base, revision=revision)
+model = AutoModelForCausalLM.from_pretrained(base, revision=revision)
+model = PeftModel.from_pretrained(
+    model, "open-nhe/Elysium-X-150-FR",
+    subfolder="chatgpt_batch_v2_recovery/adapter",
+    revision="6f27585af638531c2dabed110d0cc183b4b040d0",
+)
 ```
 
-## Layout
+Authenticate separately with an account permitted to read this private repository. Do not put access tokens in notebooks or source files. Use the exact system prompt and causal input format documented in `release/inference_contract.txt`. The model emits `{"dimensions":[{"id":1,"strength":0.5}]}` with IDs 1..150 and expressed intensity >0..1. An empty list means no supported label was returned, not verified neutrality. Omitted coordinates are unknown, not proven absent.
 
-```
-src/         state.py (NcR + state record), window.py (causal window), metrics.py (strict parse + masked eval),
-             ingest_oasst.py, train.py, pilot.py, pilot_hf.py
-tests/       unit tests for state, window and metrics
-notebooks/   pilot Colab notebooks (scaffold)
-docs/        phase1.md (research and design gate), taxonomy.json
-assets/      SVG banner and diagrams used by this README
-```
+## Data and human review
 
-Run the tests with `python -m unittest discover -s tests` (Python 3 standard library only; the window test uses a stub tokenizer).
+The original batch contains 1,000 four-turn controlled fictional English dialogues and 4,000 target-turn labeling rows. Labels were generated using ChatGPT. On October 3, 2026, the owner stated that he personally verified all returned Excel sheets. This is recorded as owner-reported human review of AI-generated labels, not independent human-gold annotation or proof that every label is correct.
 
-## Evaluation rules (design)
+All 4,000 returned rows passed structural, unchanged-context and exact causal target-speaker quote checks. A conservative semantic screen quarantined 160 whole rows. Identical causal inputs removed another 1,149 duplicate rows; no identical-input label conflicts were found. The remaining 2,691 unique candidates were filtered by source grouping and a maximum of four training contexts per repeated target template.
 
-`src/metrics.py` parses model output strictly (exact keys, IDs 1..150, strengths in 0..1, no duplicates) and scores only the dimensions a record actually labels. Unlabelled coordinates stay masked, and weak or synthetic labels must never be reported as human gold. No evaluation has been run.
+Actual frozen split: 1,012 training rows (644 positive, 368 empty), 35 development rows, 78 test rows (73 positive, 5 empty). The development set was reserved but not used for model selection. Another 1,566 screened candidates were unused by grouping/template cap. Training did not use all 4,000 rows. Source groups and exact target text are disjoint between train, development and test. The data still uses controlled templates and is not 1,000 independent natural-chat scenarios.
 
-## Data and licensing notes
+Training supports 117 positive coordinate IDs. Test labels cover 44 IDs, including three test-only IDs (122, 138, 143). The product schema has 150 IDs; that is not evidence of measured competence across all 150.
 
-Phase 1 lists candidate sources with their published counts and terms. Several are noncommercial or agreement-gated and are excluded from unrestricted product training until permission is established. Nothing has been downloaded or accepted. See `docs/phase1.md` for the table and the planned build rules (split by original conversation, no random overlapping windows, teacher labels treated as weak supervision).
+## Actual evaluation
 
-## License
+Same frozen 78-row test, SHA-256 `71268f311212692113ac0d9b4eb6c2783118425e049c543d26ffb15f554bbb62`.
 
-Proprietary - All Rights Reserved. Copyright (c) Pratham Prateek Mohanty / Project NHE. See [LICENSE](LICENSE).
+| Metric | Untouched base | Saved step-125 adapter | Final continuation |
+|---|---:|---:|---:|
+| Micro-F1 against reviewed ChatGPT labels | 0.0000 | 0.6590 | 0.7251 |
+| Exact label-set agreement | 0/78 | 47/78 | 49/78 (62.82%) |
+| Strict JSON schema | 0/78 | 78/78 | 78/78 |
+| Nonempty predictions | 0/78 parsed | 73/78 | 71/78 |
 
-The Qwen2.5 base model stays under Apache-2.0 with its upstream notices, and is not relicensed by this repository.
+Final TP=62, FP=19, FN=28. Macro-F1 over the 44 teacher-supported test IDs: 0.7083. Positive-only exact agreement: 44/73. All five teacher-empty test rows were matched. The all-empty reference has zero positive-label F1 and only 5/78 exact matches.
+
+**0.7251 is micro-F1, not the percentage of conversations judged correctly.** Exact label-set agreement is 62.82%. Metrics quantify agreement with this reviewed synthetic teacher dataset, not general emotion accuracy.
+
+Matched-label intensity MAE: 0.0161. This is teacher-label agreement, not validated intensity calibration. Tesla T4 latency: median 2.576s, 95th percentile 4.005s for these inputs and settings. No device-general speed claim.
+
+## Training provenance
+
+Pinned base revision: `989aa7980e4cf806f80c7fef2b1adb7bc71aa306`. QLoRA rank 16, learning rate 0.0001, gradient accumulation 8, seed 150, maximum input-plus-output budget 4096 tokens.
+
+First stage saved 125 optimizer steps / 1,000 example updates before the interactive session was cancelled. Continuation loaded that adapter with a new optimizer/scheduler, then completed 127 steps / 1,012 updates. This was not an exact uninterrupted resume. Recovery checkpoints include optimizer, scheduler and scaler state. The committed free-GPU run completed in 48 minutes 44 seconds.
+
+The recovery `comparison.json` retains a historical key `base` for the loaded step-125 adapter. It is not the untouched base. The separate original `chatgpt_batch_v2/base_metrics.json` contains that baseline. Final predictions and their aggregate counts were independently recounted.
+
+## Contents
+
+- `chatgpt_batch_v2_recovery/adapter`: final adapter and tokenizer files.
+- `chatgpt_batch_v2_recovery/`: final metrics, predictions, comparison, curve, run configuration, frozen splits and recoverable training state.
+- `release/`: audit, inference contract and release scope.
+- `chatgpt_batch_v2/`: earlier checkpoint and untouched-base results.
+- Other directories: historical pilot/anchor evidence, with their own limits.
+
+GitHub code and release notes: https://github.com/itsppm76/Elysium-X-150-FR
+
+## Limits and safety
+
+Appraise expressed text for only the target speaker at the target turn. Never leak future turns, attribute another speaker's state to the target, or treat a negated/resolved state as current. Labels are not diagnosis, consent, intent, safety decisions or permission to write memories or make commitments. No clinical or crisis decisions should depend on this model. Do not infer real private feelings from its output.
+
+No independent natural-conversation gold evaluation, validated Hindi/Hinglish or other-language evaluation, full-150 benchmark, robustness audit, or production-serving test is claimed.
+
+## Rights and upstream notices
+
+Original project contributions are proprietary, All Rights Reserved, Pratham Prateek Mohanty. The Qwen2.5-1.5B-Instruct base is Apache-2.0, Alibaba/Qwen; its rights and notices remain in force. The original upstream license is preserved in the run folders. This repository is private; moving it into an organisation does not change the upstream license.
