@@ -221,7 +221,7 @@ The committed recovery loaded the saved step-125 adapter. It did **not** restore
 Together, the saved stages contain 252 optimizer steps and 2,012 example updates. This is not the same as two clean uninterrupted epochs. The recovery run completed in 48 minutes 44 seconds, and its final predictions and metrics were saved. The draft session was OFF after completion, with no active-job indicator.
 
 ```mermaid
-flowchart LR
+flowchart TD
   A[Pinned Qwen base] --> B[First training stage]
   B --> C[Saved step 125 adapter]
   B --> D[Interactive session cancelled]
