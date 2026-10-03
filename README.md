@@ -15,10 +15,13 @@ This repository holds the design, the schema, the deterministic code with its te
 |---|---|
 | Phase 1 research and design gate (`docs/phase1.md`) | Written |
 | 150-dimension taxonomy v0.1 proposal (`docs/taxonomy.json`) | Written, unvalidated by annotators |
-| Deterministic state and NcR indexing (`src/state.py`) | Written, 7 unit tests pass (state + window) |
+| Deterministic state and NcR indexing (`src/state.py`) | Written, tested |
 | Shared causal window (`src/window.py`) | Written, tested |
-| Pilot notebook (`notebooks/`) | Scaffold, no published results |
+| Strict output schema and masked evaluation code (`src/metrics.py`) | Written, tested. Never run on real model output |
+| OASST ingestion with tree-level splits (`src/ingest_oasst.py`) | Written, nothing downloaded or accepted yet |
+| Pilot notebooks, original and HF-checkpoint fallback (`notebooks/`) | Scaffold, no published results |
 | Training script (`src/train.py`) | Scaffold, not run for any released result |
+| Unit tests | 11 pass (state, causal window, metrics) |
 | Training data | None accepted yet |
 | Adapter weights | None |
 | Evaluation scores | None |
@@ -70,14 +73,19 @@ subset_rank([3, 17, 42])          # {'n': 150, 'r': 3, 'rank': ..., 'active_ids'
 ## Layout
 
 ```
-src/         state.py (NcR + state record), window.py (causal window), train.py, pilot.py
-tests/       unit tests for state and window
-notebooks/   pilot Colab notebook (scaffold)
+src/         state.py (NcR + state record), window.py (causal window), metrics.py (strict parse + masked eval),
+             ingest_oasst.py, train.py, pilot.py, pilot_hf.py
+tests/       unit tests for state, window and metrics
+notebooks/   pilot Colab notebooks (scaffold)
 docs/        phase1.md (research and design gate), taxonomy.json
 assets/      SVG banner and diagrams used by this README
 ```
 
 Run the tests with `python -m unittest discover -s tests` (Python 3 standard library only; the window test uses a stub tokenizer).
+
+## Evaluation rules (design)
+
+`src/metrics.py` parses model output strictly (exact keys, IDs 1..150, strengths in 0..1, no duplicates) and scores only the dimensions a record actually labels. Unlabelled coordinates stay masked, and weak or synthetic labels must never be reported as human gold. No evaluation has been run.
 
 ## Data and licensing notes
 
