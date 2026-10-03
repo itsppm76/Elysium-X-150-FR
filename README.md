@@ -1,6 +1,8 @@
-![Elysium X 150 FR monochrome animated title card](elysium-banner.svg)
+![Elysium X 150 FR colorful animated title card](elysium-color.svg)
 
 # Elysium X 150 FR
+
+[Read the full plain-language guide, workflows and all 150 labels](DOCUMENTATION.md) · [Model and weights](https://huggingface.co/open-nhe/Elysium-X-150-FR) · [Code and evidence](RELEASE_CODE_AND_EVIDENCE.md)
 
 Private research release by Pratham Prateek Mohanty, OpenNHE Technologies.
 
