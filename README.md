@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/banner.svg" alt="Elysium X 150 FR" width="100%"></p>
+![Elysium X 150 FR monochrome animated title card](4-elysium-motion.gif)
 
 # Elysium X 150 FR
 
