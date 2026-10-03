@@ -1,4 +1,4 @@
-![Elysium X 150 FR](elysium-banner.svg)
+![Elysium X 150 FR](elysium-color.svg)
 
 # Elysium X 150 FR
 ## The latest in the FR family series
