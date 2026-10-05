@@ -7,6 +7,8 @@
 
 Public research release by Pratham Prateek Mohanty / OpenNHE Technologies. Release documentation: October 3, 2026.
 
+**Technical paper:** [Elysium X 150 FR: A Small LoRA Adapter for Sparse, Per-Speaker Emotion and Appraisal Labeling over a 150-Coordinate Schema](https://doi.org/10.5281/zenodo.23155240) (Zenodo preprint, DOI 10.5281/zenodo.23155240), Pratham Prateek Mohanty. Paper page with in-browser demo: [open-nhe/Elysium-X-150-FR-Paper](https://huggingface.co/spaces/open-nhe/Elysium-X-150-FR-Paper).
+
 This guide describes the measured X150 FR release. It does not turn earlier X20-family results into X150 results, and it does not claim that FR has a particular expanded meaning unless the owner defines it. "Latest" describes this release in the project family, not a claim that it beats every earlier model on a fair benchmark.
 
 ## Navigation
