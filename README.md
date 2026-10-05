@@ -2,11 +2,11 @@
 
 # Elysium X 150 FR
 
-[Illustrated 30-page PDF guide](https://huggingface.co/open-nhe/Elysium-X-150-FR/blob/main/7-Elysium_X_150_FR_Full_Documentation.pdf) (private HF access required).
+[Illustrated 30-page PDF guide](https://huggingface.co/open-nhe/Elysium-X-150-FR/blob/main/7-Elysium_X_150_FR_Full_Documentation.pdf) (public, on the Hugging Face model page).
 
 [Read the full plain-language guide, workflows and all 150 labels](DOCUMENTATION.md) · [Model and weights](https://huggingface.co/open-nhe/Elysium-X-150-FR) · [Code and evidence](RELEASE_CODE_AND_EVIDENCE.md)
 
-Private research release by Pratham Prateek Mohanty, OpenNHE Technologies.
+Public research release by Pratham Prateek Mohanty, OpenNHE Technologies.
 
 A trained LoRA adapter on pinned Qwen2.5-1.5B-Instruct for sparse, per-speaker emotion/appraisal JSON across a provisional 150-coordinate schema. This is a measured English synthetic-data release, not a claim of SOTA, independently validated psychology, multilingual performance, or deployment readiness.
 
@@ -31,11 +31,11 @@ model = PeftModel.from_pretrained(
 
 Hugging Face model repository: https://huggingface.co/open-nhe/Elysium-X-150-FR
 
-Authenticate separately with an account permitted to read this private repository. Do not put access tokens in notebooks or source files. Use the exact system prompt and causal input format documented in `release/inference_contract.txt` in the HF `1-FinalRelease_Code_Audit.zip`. The model emits `{"dimensions":[{"id":1,"strength":0.5}]}` with IDs 1..150 and expressed intensity >0..1. An empty list means no supported label was returned, not verified neutrality. Omitted coordinates are unknown, not proven absent.
+The repository is public; no access request is needed. Do not put access tokens in notebooks or source files. Use the exact system prompt and causal input format documented in `release/inference_contract.txt` in the HF `1-FinalRelease_Code_Audit.zip`. The model emits `{"dimensions":[{"id":1,"strength":0.5}]}` with IDs 1..150 and expressed intensity >0..1. An empty list means no supported label was returned, not verified neutrality. Omitted coordinates are unknown, not proven absent.
 
 ## Data and human review
 
-The original batch contains 1,000 four-turn controlled fictional English dialogues and 4,000 target-turn labeling rows. Labels were generated using ChatGPT. On October 3, 2026, the owner stated that he personally verified all returned Excel sheets. This is recorded as owner-reported human review of AI-generated labels, not independent human-gold annotation or proof that every label is correct.
+The original batch contains 1,000 four-turn controlled fictional English dialogues and 4,000 target-turn labeling rows. The dialogues were written by an AI from scenario prompts. The labels were generated through the owner's ChatGPT workflow and personally reviewed by him across all 1,000 dialogues (owner-reported review). This is not independent multi-annotator gold annotation or proof that every label is correct. The full labeled set is public: https://huggingface.co/datasets/open-nhe/Elysium-X-150-FR-dataset (CC BY 4.0).
 
 All 4,000 returned rows passed structural, unchanged-context and exact causal target-speaker quote checks. A conservative semantic screen quarantined 160 whole rows. Identical causal inputs removed another 1,149 duplicate rows; no identical-input label conflicts were found. The remaining 2,691 unique candidates were filtered by source grouping and a maximum of four training contexts per repeated target template.
 
@@ -49,7 +49,7 @@ Same frozen 78-row test, SHA-256 `71268f311212692113ac0d9b4eb6c2783118425e049c54
 
 | Metric | Untouched base | Saved step-125 adapter | Final continuation |
 |---|---:|---:|---:|
-| Micro-F1 against reviewed ChatGPT labels | 0.0000 | 0.6590 | 0.7251 |
+| Micro-F1 against owner-reviewed labels (ChatGPT-generated) | 0.0000 | 0.6590 | 0.7251 |
 | Exact label-set agreement | 0/78 | 47/78 | 49/78 (62.82%) |
 | Strict JSON schema | 0/78 | 78/78 | 78/78 |
 | Nonempty predictions | 0/78 parsed | 73/78 | 71/78 |
@@ -88,4 +88,5 @@ No independent natural-conversation gold evaluation, validated Hindi/Hinglish or
 
 ## Rights and upstream notices
 
-Original project contributions are proprietary, All Rights Reserved, Pratham Prateek Mohanty. The Qwen2.5-1.5B-Instruct base is Apache-2.0, Alibaba/Qwen; its rights and notices remain in force. The original upstream license is preserved in the run folders. This repository is private; moving it into an organisation does not change the upstream license.
+Original project contributions are proprietary, All Rights Reserved, Pratham Prateek Mohanty. The Qwen2.5-1.5B-Instruct base is Apache-2.0, Alibaba/Qwen; its rights and notices remain in force. The original upstream license is preserved in the run folders. This repository is public; publishing or moving it does not change the upstream license. The labeled dataset is released separately under CC BY 4.0 (https://huggingface.co/datasets/open-nhe/Elysium-X-150-FR-dataset); the model, code and documentation keep the rights stated above.
+

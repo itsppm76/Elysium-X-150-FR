@@ -5,7 +5,7 @@
 
 **A plain-language guide to the model, the dataset, the training run, and what the result really means.**
 
-Private research release by Pratham Prateek Mohanty / OpenNHE Technologies. Release documentation: October 3, 2026.
+Public research release by Pratham Prateek Mohanty / OpenNHE Technologies. Release documentation: October 3, 2026.
 
 This guide describes the measured X150 FR release. It does not turn earlier X20-family results into X150 results, and it does not claim that FR has a particular expanded meaning unless the owner defines it. "Latest" describes this release in the project family, not a claim that it beats every earlier model on a fair benchmark.
 
@@ -36,18 +36,18 @@ The current release is a LoRA adapter built on Qwen2.5-1.5B-Instruct. Think of t
 | Final micro-F1 | 0.725146 against reviewed synthetic labels |
 | Exact full label-set match | 49/78, or 62.82% |
 | Compute | Free Kaggle Tesla T4 |
-| Visibility | X150 GitHub and Hugging Face repositories private |
+| Visibility | X150 GitHub and Hugging Face repositories public |
 
 ### Repository map
 
-- [Private Hugging Face model](https://huggingface.co/open-nhe/Elysium-X-150-FR): actual weights, frozen datasets, predictions, metrics, historical checkpoints and release package.
-- [Private GitHub repository](https://github.com/itsppm76/Elysium-X-150-FR): project code/design, this guide, title-card assets and code/evidence reference.
+- [Hugging Face model (public)](https://huggingface.co/open-nhe/Elysium-X-150-FR): actual weights, frozen datasets, predictions, metrics, historical checkpoints and release package.
+- [GitHub repository (public)](https://github.com/itsppm76/Elysium-X-150-FR): project code/design, this guide, title-card assets and code/evidence reference.
 - [Final evaluation checkpoint](https://huggingface.co/open-nhe/Elysium-X-150-FR/commit/6f27585af638531c2dabed110d0cc183b4b040d0): preserved complete-run snapshot.
 - [Final adapter folder](https://huggingface.co/open-nhe/Elysium-X-150-FR/tree/main/chatgpt_batch_v2_recovery/adapter): LoRA configuration, safetensors and tokenizer files.
 - [Full release code/audit package](https://huggingface.co/open-nhe/Elysium-X-150-FR/blob/main/1-FinalRelease_Code_Audit.zip): exact inference prompt, taxonomy, scripts, final predictions and audit reports.
 - [Code and measured evidence](RELEASE_CODE_AND_EVIDENCE.md): readable source and final configuration on GitHub. Script data payload was externalized for readable presentation; no new run was performed.
 
-A private link is not a public download. The viewer must sign in with an account that has access. Organisation membership controls private HF access; transferring the repositories did not turn them public.
+Both repositories are public. No sign-in or access request is needed to read or download them. The labeled dataset is also public: https://huggingface.co/datasets/open-nhe/Elysium-X-150-FR-dataset (CC BY 4.0).
 
 ## 1. What happens when the model reads a conversation?
 
@@ -130,7 +130,7 @@ The full 150-coordinate reference is in Section 10, including the insufficient-o
 
 The new batch contained five chunks of 200 four-turn conversations each. Each chunk created 800 target-turn labeling rows. Across five chunks, that is 1,000 dialogues and 4,000 rows.
 
-The conversations were controlled synthetic English text, not scraped private chats or 1,000 independent real-life interviews. Dialogue generation and labels are separate stages: the dialogue author prepared scenarios, then the owner used the ChatGPT labeling workflow and returned five Excel sheets.
+The conversations were controlled synthetic English text, not scraped private chats or 1,000 independent real-life interviews. Dialogue generation and labels are separate stages: the an AI wrote the dialogues from scenarios, then the owner ran the ChatGPT labeling workflow on five Excel sheets and personally reviewed and returned them.
 
 There were 1,000 exact-unique dialogue texts but only 300 source scenario groups. The later chunks reused 200 episode leads across four emotional trajectories. Exact uniqueness is therefore not the same as full scenario independence. This is why grouping and target-template caps are important.
 
@@ -142,7 +142,7 @@ The supplied rules ask for the smallest defensible label set. Similar words are 
 
 ### 3.3 Owner review
 
-On October 3, 2026, Pratham stated that he personally verified every returned Excel sheet. That is recorded as owner-reported personal review of ChatGPT-generated labels.
+On October 3, 2026, Pratham stated that he personally verified every returned Excel sheet. That is recorded as owner-reported personal review across all 1,000 dialogues of labels generated through the owner's ChatGPT workflow.
 
 This review is part of the dataset provenance. It does not change which rows the training actually used, erase the known quarantines, or create an independent multi-annotator gold study. Such a study would separately record independent judgments, disagreements and adjudication. The existing result can honestly be described as agreement with the owner's reviewed synthetic teacher dataset.
 
@@ -229,7 +229,7 @@ flowchart TD
   E --> F[New optimizer and scheduler]
   F --> G[127 additional steps]
   G --> H[Final heldout evaluation]
-  H --> I[Private saved weights and evidence]
+  H --> I[Saved weights and evidence]
 ```
 
 No new training was performed during repository migration or documentation creation. Moving a model into an organisation does not improve or reduce its score.
@@ -244,7 +244,7 @@ A hash is a file fingerprint: it helps check that the test file did not change b
 
 | Metric | Untouched base | Step-125 adapter | Final continuation |
 |---|---:|---:|---:|
-| Micro-F1 vs reviewed ChatGPT labels | 0.0000 | 0.65896 | 0.72515 |
+| Micro-F1 vs owner-reviewed labels (ChatGPT-generated) | 0.0000 | 0.65896 | 0.72515 |
 | Exact label-set match | 0/78 | 47/78 | 49/78 |
 | Strict JSON validity | 0/78 | 78/78 | 78/78 |
 | Nonempty parsed predictions | 0/78 | 73/78 | 71/78 |
@@ -277,7 +277,7 @@ The recovery `comparison.json` uses the historical key `base` to mean the loaded
 
 ## 6. What is ready, and what is not?
 
-**Ready in this release:** private downloadable adapter, reproducible pinned base identity, documented input/output contract, frozen dataset evidence, saved predictions, measured test results and honest provenance.
+**Ready in this release:** public downloadable adapter, reproducible pinned base identity, documented input/output contract, frozen dataset evidence, saved predictions, measured test results and honest provenance.
 
 **Not established:** independently annotated natural-chat accuracy, full-150 coverage, Hindi/Hinglish or other-language quality, population validity, intensity calibration, crisis reliability, bias/fairness, adversarial robustness, or deployment readiness.
 
@@ -291,7 +291,7 @@ Never use these labels alone for medical, employment, educational, insurance, po
 
 ### Step A: get access and the right files
 
-Sign in to the private HF repository with a permitted account. Download or load the pinned base and adapter. Do not put tokens into notebook cells, source files or shared screenshots. Use your environment's supported secret mechanism and keep credentials outside the code.
+Download or load the pinned base and adapter. Do not put tokens into notebook cells, source files or shared screenshots. Use your environment's supported secret mechanism and keep credentials outside the code.
 
 The full inference contract lives in the HF release ZIP as `release/inference_contract.txt`. It contains the **exact** final system prompt, with all ID/name pairs. The reference definitions in Section 10 are the full labeling definitions, not a substitute for that exact training prompt. The trained prompt uses the compact ID/name legend to fit the context budget.
 
@@ -392,15 +392,15 @@ This diagram describes a **recommended future evaluation workflow**, not work al
 
 ## 9. Rights, release scope and common questions
 
-Original X150 project contributions are proprietary, All Rights Reserved, Pratham Prateek Mohanty. The Qwen2.5 base is Apache-2.0 and retains its own license and notices. Third-party materials retain their applicable terms. A private repository does not remove an upstream license obligation.
+Original X150 project contributions are proprietary, All Rights Reserved, Pratham Prateek Mohanty. The Qwen2.5 base is Apache-2.0 and retains its own license and notices. Third-party materials retain their applicable terms. Making the repository public does not remove an upstream license obligation. The labeled dataset is released separately under CC BY 4.0; the model, code and documentation keep the rights stated above.
 
-The older non-FR X20 model remains public under its existing MIT card, by the owner's choice. That does not make X150 MIT. The private X150 and X20-FR repositories and public X20 now sit under the OpenNHE organisation.
+The older non-FR X20 model remains public under its existing MIT card, by the owner's choice. That does not make X150 MIT. The public X150 repositories, the X20-FR repository and the public X20 now sit under the OpenNHE organisation.
 
 **Is it trained on all 4,000 rows?** No. The returned batch has 4,000 rows; the final training split has 1,012 after screening, deduplication, grouping and caps.
 
 **Is the model 72.5% accurate at understanding humans?** No such general accuracy result exists. Its micro-F1 agreement is 0.72515 on 78 controlled reference rows, with 49 exact label-set matches.
 
-**Did the owner check the labels?** He stated that he personally verified all Excel sheets. The data remains ChatGPT-generated labeling with owner-reported review, not an independent annotation study.
+**Did the owner check the labels?** He stated that he personally verified all Excel sheets. The labels were generated through his ChatGPT workflow and personally reviewed by him across all 1,000 dialogues (owner-reported review); this is not an independent annotation study.
 
 **Does 150 mean 150 emotions were all learned?** No. It is the schema size. There are 117 positive training IDs and 44 teacher-supported test IDs.
 
@@ -408,11 +408,11 @@ The older non-FR X20 model remains public under its existing MIT card, by the ow
 
 **Is a valid JSON answer necessarily right?** No. Format and label correctness are separate.
 
-**What did migration change?** Ownership namespace and private-access management, not weights or measured results. Existing HF history was preserved.
+**What did migration change?** Ownership namespace and access management, not weights or measured results. Existing HF history was preserved.
 
 **Why not silently call the recovery two epochs?** The optimizer/scheduler restarted after a saved adapter. Exact provenance matters when reproducing a result.
 
-**Why are code and audit files in different places?** GitHub binary file-upload commits failed during publication. The full ZIP is safely on private HF; GitHub has readable text source and evidence links. No failed ZIP is presented as available.
+**Why are code and audit files in different places?** GitHub binary file-upload commits failed during publication. The full ZIP is on the public HF repository; GitHub has readable text source and evidence links. No failed ZIP is presented as available.
 
 <details>
 <summary>Open the full 150-coordinate reference</summary>
@@ -635,3 +635,4 @@ The release numbers above are grounded in the frozen split audit, final run conf
 - Training stages and baseline interpretation: final checkpoint and `RELEASE_CODE_AND_EVIDENCE.md`.
 
 No new benchmark, paid compute, external sharing or retraining was required for this guide.
+
