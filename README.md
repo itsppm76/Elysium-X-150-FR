@@ -2,6 +2,8 @@
 
 # Elysium X 150 FR
 
+**Technical paper:** [Elysium X 150 FR: A Small LoRA Adapter for Sparse, Per-Speaker Emotion and Appraisal Labeling over a 150-Coordinate Schema](https://doi.org/10.5281/zenodo.23155240) (Zenodo preprint, DOI 10.5281/zenodo.23155240), Pratham Prateek Mohanty. Paper page with in-browser demo: [open-nhe/Elysium-X-150-FR-Paper](https://huggingface.co/spaces/open-nhe/Elysium-X-150-FR-Paper).
+
 [Illustrated 30-page PDF guide](https://huggingface.co/open-nhe/Elysium-X-150-FR/blob/main/7-Elysium_X_150_FR_Full_Documentation.pdf) (public, on the Hugging Face model page).
 
 [Read the full plain-language guide, workflows and all 150 labels](DOCUMENTATION.md) · [Model and weights](https://huggingface.co/open-nhe/Elysium-X-150-FR) · [Code and evidence](RELEASE_CODE_AND_EVIDENCE.md)
